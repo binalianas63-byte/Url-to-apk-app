@@ -2,7 +2,22 @@ import os, re, json, io, sys, urllib.request
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = Path(__file__).resolve().parent.parent / "android"
+import shutil
+BASE = Path(__file__).resolve().parent
+ROOT = BASE / "android"
+LAYOUT = {
+    "settings.gradle": "android/settings.gradle",
+    "gradle.properties": "android/gradle.properties",
+    "build.gradle": "android/build.gradle",
+    "app.gradle": "android/app/build.gradle",
+    "AndroidManifest.xml": "android/app/src/main/AndroidManifest.xml",
+    "MainActivity.java": "android/app/src/main/java/com/webtoapk/app/MainActivity.java",
+}
+for _src, _dst in LAYOUT.items():
+    _p = BASE / _dst
+    _p.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy(BASE / _src, _p)
+(ROOT / "app/src/main/assets").mkdir(parents=True, exist_ok=True)
 
 def die(m):
     print("ERROR:", m)

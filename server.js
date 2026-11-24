@@ -75,7 +75,7 @@ function saveIcon(dataUri, id) {
   return `${BASE}/icons/${id}.png`;
 }
 
-app.use(express.static(require('path').join(__dirname, 'public')));
+app.get('/', (req, res) => res.sendFile(require('path').join(__dirname, 'index.html')));
 app.get('/health', (req, res) => res.send('ok'));
 
 app.get('/icons/:id.png', (req, res) => {

@@ -38,7 +38,7 @@ jobs:
         env:
           CONFIG: ${{ inputs.config }}
           ICON_URL: ${{ inputs.icon_url }}
-        run: python scripts/prepare.py
+        run: python prepare.py
       - name: Keystore
         env:
           KS_B64: ${{ secrets.KEYSTORE_BASE64 }}
